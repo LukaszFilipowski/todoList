@@ -26,16 +26,21 @@ class NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
     @note.user_id = session[:user_id]
+    @note.status = 0
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to @note, notice: 'Note was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Pomyślnie dodano' }
         format.json { render :show, status: :created, location: @note }
       else
-        format.html { render :new }
+        format.html { redirect_to root_path, notice: 'Musisz wypełnić wszystkie wymagane pola'  }
         format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def archive
+    @notes = Note.where("user_id = :user_id and status = 1", :user_id => session[:user_id])
   end
 
   # PATCH/PUT /notes/1
@@ -43,10 +48,10 @@ class NotesController < ApplicationController
   def update
     respond_to do |format|
       if @note.update(note_params)
-        format.html { redirect_to @note, notice: 'Note was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Pomyślnie edytowano' }
         format.json { render :show, status: :ok, location: @note }
       else
-        format.html { render :edit }
+        format.html { redirect_to root_path, notice: 'Błąd podczas edycji' }
         format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end

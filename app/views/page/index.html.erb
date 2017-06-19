@@ -106,7 +106,12 @@
       </div>
       <!-- /.panel-heading -->
       <div class="panel-body">
-        <%= render 'notes/form', note: Note.new  %>
+        <% if(params[:note] != nil)
+             @note = Note.find(params[:note])
+           else
+             @note = Note.new
+           end %>
+        <%= render 'notes/form', note: @note  %>
       </div>
 
     </div>
@@ -140,9 +145,7 @@
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="#">Oznacz jako wykonane</a>
                       </li>
-                      <li><a href="<%= edit_note_path(note) %>">Edytuj</a>
-                      </li>
-                      <li><a href="<%= notes_path %>">Zarządzaj</a>
+                      <li><a href="<%= root_path(:note => note) %>">Edytuj</a>
                       </li>
                     </ul>
                   </div>

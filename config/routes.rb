@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
   resources :notes
+
   resources :sessions, only: [:new, :create, :destroy]
+
+  get 'archive', to: 'notes#archive', as: 'archive'
 
   get 'singup', to: 'users#new', as: 'singup'
   get 'login', to: 'sessions#new', as: 'login'

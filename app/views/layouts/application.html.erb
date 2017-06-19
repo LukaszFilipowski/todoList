@@ -51,6 +51,9 @@
     </nav>
 
     <div id="page-wrapper">
+      <% if flash[:notice] %>
+          <div class="alertBox alert alert-info"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><%= flash[:notice] %></div>
+      <% end %>
       <%= yield %>
     </div>
   </div>

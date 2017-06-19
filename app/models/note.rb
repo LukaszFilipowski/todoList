@@ -1,6 +1,9 @@
 class Note < ApplicationRecord
   belongs_to :user
 
+  validates :title, presence:true
+  validates :text, presence:true
+
   def self.allowed_colors
     [["Domyślny",""],["Żółty","warning"],["Czerwony","danger"], ["Niebieski", "info"], ["Zielony", "success"]]
 
