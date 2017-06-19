@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  title: MyString
+  text: MyString
+  toDate: 2017-06-19
+  status: 1
+  icon: MyString
+  color: MyString
+
+two:
+  user_id: 1
+  title: MyString
+  text: MyString
+  toDate: 2017-06-19
+  status: 1
+  icon: MyString
+  color: MyString

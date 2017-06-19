@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :notes
   resources :sessions, only: [:new, :create, :destroy]
 
   get 'singup', to: 'users#new', as: 'singup'

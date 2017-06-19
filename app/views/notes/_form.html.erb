@@ -1,0 +1,50 @@
+<%= form_for note do |f| %>
+  <% if note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+      <ul>
+      <% note.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title, :class => 'mr-sm-2' %>
+    <%= f.text_field :title, :class => 'form-control mb-2 mr-sm-2 mb-sm-0' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :text, :class => 'mr-sm-2' %>
+    <%= f.text_area :text, :class => 'form-control mb-2 mr-sm-2 mb-sm-0' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :toDate, :class => 'mr-sm-2' %>
+    <%= f.text_field :toDate, :class => 'datePicker' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :icon, :class => 'mr-sm-2' %>
+    <%= f.select :icon, collection: Note.allowed_icons %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :color, :class => 'mr-sm-2' %>
+    <%= f.select :color, collection: Note.allowed_colors %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit :class => 'btn btn-primiary' %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  //$('.datePicker').datepicker ( "option", "dateFormat", 'yy-mm-dd' );
+  $('.datePicker').datepicker({
+      format: "yyyy-mm-dd",
+      startDate: "today"
+  });
+</script>

@@ -1,4 +1,6 @@
 class PageController < ApplicationController
   def index
-  end
+    @notes = Note.where(user_id: session[:user_id])
+    @notesCount = @notes.count
+end
 end
