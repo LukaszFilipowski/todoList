@@ -35,13 +35,14 @@
           <ul class="dropdown-menu dropdown-user">
             <% if current_user %>
                 <li><a href="#"><i class="fa fa-user fa-fw"></i> Zalogowany jako  <%=current_user.email%></a></li>
+                <li><a href="<%= edit_user_path(current_user.id) %>"><i class="fa fa-cog fa-fw"></i> Edycja profilu</a></li>
                 <li class="divider"></li>
                 <li><a href="<%=logout_path %>"><i class="fa fa-sign-out fa-fw"></i> Wyloguj</a>
                 </li>
              <% else %>
-                <li><a href="<%=login_path %>"><i class="fa fa-sign-out fa-fw"></i> Logowanie</a>
+                <li><a href="<%=login_path %>"><i class="fa fa-sign-in fa-fw"></i> Logowanie</a>
                 </li>
-                <li><a href="<%=singup_path %>"><i class="fa fa-sign-out fa-fw"></i> Rejestracja</a>
+                <li><a href="<%=singup_path %>"><i class="fa fa-sign-in fa-fw"></i> Rejestracja</a>
                 </li>
              <% end %>
           </ul>

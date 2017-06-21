@@ -6,6 +6,12 @@ Rails.application.routes.draw do
 
   get 'archive', to: 'notes#archive', as: 'archive'
 
+  resources :notes do
+    member do
+      get 'changestatus'
+    end
+  end
+
   get 'singup', to: 'users#new', as: 'singup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'

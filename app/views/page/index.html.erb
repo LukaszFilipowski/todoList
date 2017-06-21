@@ -5,161 +5,176 @@
   <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
-<div class="row">
-  <div class="col-lg-3 col-md-6">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <div class="row">
-          <div class="col-xs-3">
-            <i class="fa fa-comments fa-5x"></i>
-          </div>
-          <div class="col-xs-9 text-right">
-            <div class="huge">26</div>
-            <div>Ukończonych zadań</div>
+<% if current_user %>
+  <div class="row">
+    <div class="col-lg-4 col-md-8">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-comments fa-5x"></i>
+            </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge"><%= @archieveCount %></div>
+              <div>Ukończonych zadań</div>
+            </div>
           </div>
         </div>
+        <a href="<%= archive_path %>">
+          <div class="panel-footer">
+            <span class="pull-left">Zobacz archiwum</span>
+            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+            <div class="clearfix"></div>
+          </div>
+        </a>
       </div>
-      <a href="#">
-        <div class="panel-footer">
-          <span class="pull-left">Zobacz archiwum</span>
-          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-          <div class="clearfix"></div>
-        </div>
-      </a>
     </div>
-  </div>
-  <div class="col-lg-3 col-md-6">
-    <div class="panel panel-green">
-      <div class="panel-heading">
-        <div class="row">
-          <div class="col-xs-3">
-            <i class="fa fa-tasks fa-5x"></i>
-          </div>
-          <div class="col-xs-9 text-right">
-            <div class="huge"><%= @notesCount %></div>
-            <div>Aktywnych zadań</div>
+    <div class="col-lg-4 col-md-8">
+      <div class="panel panel-green">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-tasks fa-5x"></i>
+            </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge"><%= @notesCount %></div>
+              <div>Aktywnych zadań</div>
+            </div>
           </div>
         </div>
+        <a href="#taskLists">
+          <div class="panel-footer">
+            <span class="pull-left">Zobacz szczegóły</span>
+            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+            <div class="clearfix"></div>
+          </div>
+        </a>
       </div>
-      <a href="#taskLists">
-        <div class="panel-footer">
-          <span class="pull-left">Zobacz szczegóły</span>
-          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-          <div class="clearfix"></div>
-        </div>
-      </a>
     </div>
-  </div>
-  <div class="col-lg-3 col-md-6">
-    <div class="panel panel-yellow">
-      <div class="panel-heading">
-        <div class="row">
-          <div class="col-xs-3">
-            <i class="fa fa-shopping-cart fa-5x"></i>
-          </div>
-          <div class="col-xs-9 text-right">
-            <div class="huge">1/5</div>
-            <div>Ukończonych dzisiaj zadań</div>
-          </div>
-        </div>
-      </div>
-      <a href="#">
-        <div class="panel-footer">
-          <span class="pull-left">Ustawienia celów</span>
-          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-          <div class="clearfix"></div>
-        </div>
-      </a>
-    </div>
-  </div>
-  <div class="col-lg-3 col-md-6">
-    <div class="panel panel-red">
-      <div class="panel-heading">
-        <div class="row">
-          <div class="col-xs-3">
-            <i class="fa fa-support fa-5x"></i>
-          </div>
-          <div class="col-xs-9 text-right">
-            <div class="huge">15</div>
-            <div>Dni z codziennie ukończonymi zadaniami</div>
-          </div>
-        </div>
-      </div>
-      <a href="#">
-        <div class="panel-footer">
-          <span class="pull-left">Trzymaj tak dalej!</span>
-          <span class="pull-right"><i class="fa fa-info"></i></span>
-          <div class="clearfix"></div>
-        </div>
-      </a>
-    </div>
-  </div>
-</div>
-<!-- /.row -->
-<div class="row">
-
-  <div class="col-lg-12">
-
-    <div class="taskLists panel panel-default">
-      <div class="panel-heading">
-        <i class="fa fa-clock-o fa-fw"></i> Dodawanie zadania
-      </div>
-      <!-- /.panel-heading -->
-      <div class="panel-body">
-        <% if(params[:note] != nil)
-             @note = Note.find(params[:note])
-           else
-             @note = Note.new
-           end %>
-        <%= render 'notes/form', note: @note  %>
-      </div>
-
-    </div>
-
-
-    <div id="taskLists" class="taskLists panel panel-default">
-      <div class="panel-heading">
-        <i class="fa fa-clock-o fa-fw"></i> Aktualne zadania
-      </div>
-      <!-- /.panel-heading -->
-      <div class="panel-body">
-        <ul class="timeline">
-          <% i = 1
-             @notes.each do |note| %>
-            <li <% if i == 0 %> class="timeline-inverted" <% i = 1 else i = 0 end %> >
-              <div class="timeline-badge <%= note.color %>"><i class="fa fa-<%= note.icon %>"></i>
+    <div class="col-lg-4 col-md-8">
+      <div class="panel panel-yellow">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-shopping-cart fa-5x"></i>
+            </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge">
+                <% if(@historyCount >= @dayObj) %>
+                  Cel dzienny wykonany
+                <% else %>
+                  <%=@historyCount%>/<%=@dayObj%>
+                <% end %>
               </div>
-              <div class="timeline-panel">
-                <div class="timeline-heading">
-                  <h4 class="timeline-title"><%= note.title %></h4>
-                  <p><small class="text-muted"><i class="fa fa-clock-o"></i> Planowana data wykonania: <%= note.toDate %> </small>
-                  </p>
-                </div>
-                <div class="timeline-body">
-                  <p><%= note.text %></p>
-                  <hr>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-gear"></i> <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Oznacz jako wykonane</a>
-                      </li>
-                      <li><a href="<%= root_path(:note => note) %>">Edytuj</a>
-                      </li>
-                    </ul>
+              <div>
+                <% if(@historyCount >= @dayObj) %>
+                    Kolejne zadania już jutro!
+                <% else %>
+                    Ukończonych dzisiaj zadań
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="<%= edit_user_path(session[:user_id]) %>">
+          <div class="panel-footer">
+            <span class="pull-left">Ustawienia celów</span>
+            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+            <div class="clearfix"></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- /.row -->
+  <div class="row">
+
+    <div class="col-lg-12">
+
+      <div class="taskLists panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-clock-o fa-fw"></i> Dodawanie zadania
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <% if(params[:note] != nil)
+               @note = Note.find(params[:note])
+             else
+               @note = Note.new
+             end %>
+          <%= render 'notes/form', note: @note  %>
+        </div>
+
+      </div>
+
+
+      <div id="taskLists" class="taskLists panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-clock-o fa-fw"></i> Aktualne zadania
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+
+            <% i = 1
+              if @notes != nil
+                 @notes.each do |note| %>
+                  <ul class="timeline">
+                <li <% if i == 0 %> class="timeline-inverted" <% i = 1 else i = 0 end %> >
+                  <div class="timeline-badge <%= note.color %>"><i class="fa fa-<%= note.icon %>"></i>
                   </div>
-                </div>
-              </div>
-            </li>
-          <% end %>
-        </ul>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title"><%= note.title %></h4>
+                      <p><small class="text-muted"><i class="fa fa-clock-o"></i> Planowana data wykonania: <%= note.toDate %> </small>
+                      </p>
+                    </div>
+                    <div class="timeline-body">
+                      <p><%= note.text %></p>
+                      <hr>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                          <i class="fa fa-gear"></i> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><%= link_to 'Oznacz jako wykonane', :action => "changestatus", :controller => "notes", :id => note.id %>
+                          </li>
+                          <li><a href="<%= root_path(:note => note) %>">Edytuj</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <% end %>
+            <% end %>
+
+        </div>
+        <!-- /.panel-body -->
       </div>
-      <!-- /.panel-body -->
+
     </div>
 
+  <!-- /.row -->
   </div>
+<%else %>
 
-<!-- /.row -->
-</div>
+    <%= form_tag sessions_path, :html => {:class => 'form-horizontal'} do %>
+        <div class="form-group">
+          <%= label_tag :email, "Email", :class => "control-label col-sm-2" %>
+          <div class="col-sm-10"> <%= text_field_tag :email %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag :password, "Hasło", :class => 'control-label col-sm-2' %>
+          <div class="col-sm-10"> <%= password_field_tag :password %></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10"><%= submit_tag "Zaloguj się", :class => "btn btn-default" %></div>
+        </div>
+
+    <% end %>
+
+<% end %>
 <!-- /#page-wrapper -->

@@ -1,39 +1,33 @@
-<p id="notice"><%= notice %></p>
+<div style="margin-top:30px;" class="row">
 
-<h1>Notes</h1>
-
-<table>
-  <thead>
-  <tr>
-    <th>User</th>
-    <th>Title</th>
-    <th>Text</th>
-    <th>Todate</th>
-    <th>Status</th>
-    <th>Icon</th>
-    <th>Color</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @notes.each do |note| %>
-      <tr>
-        <td><%= note.user_id %></td>
-        <td><%= note.title %></td>
-        <td><%= note.text %></td>
-        <td><%= note.toDate %></td>
-        <td><%= note.status %></td>
-        <td><%= note.icon %></td>
-        <td><%= note.color %></td>
-        <td><%= link_to 'Show', note %></td>
-        <td><%= link_to 'Edit', edit_note_path(note) %></td>
-        <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Note', new_note_path %>
+  <div class="col-lg-12">
+    <div id="taskLists" class="taskLists panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-clock-o fa-fw"></i> Archiwalne zadania
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <ul class="timeline">
+          <% i = 1
+             @notes.each do |note| %>
+              <li <% if i == 0 %> class="timeline-inverted" <% i = 1 else i = 0 end %> >
+                <div class="timeline-badge <%= note.color %>"><i class="fa fa-<%= note.icon %>"></i>
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4 class="timeline-title"><%= note.title %></h4>
+                    <p><small class="text-muted"><i class="fa fa-clock-o"></i> <%= note.toDate %> </small>
+                    </p>
+                  </div>
+                  <div class="timeline-body">
+                    <p><%= note.text %></p>
+                  </div>
+                </div>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+  </div>
+</div>

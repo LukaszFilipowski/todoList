@@ -17,6 +17,21 @@ class NotesController < ApplicationController
     @note = Note.new
   end
 
+  def changestatus
+
+    @note = Note.find(params[:id])
+    @note.update(:status => 1)
+
+    @user = User.find(session[:user_id])
+    @user.update(:points => @user.points+1)
+
+    @history = History.new(:user_id => session[:user_id], :note_id => params[:id], :date => Time.now.strftime("%Y-%m-%d"))
+    @history.save
+
+    redirect_to root_path, notice: "Zakończono zadanie"
+
+  end
+
   # GET /notes/1/edit
   def edit
   end
